@@ -1,6 +1,7 @@
 .PHONY: all fmt tags doc
 
 all:
+	go build ./...
 	go install ./...
 
 rall:
