@@ -1,4 +1,8 @@
-package ast
+package main
+
+import (
+	. "github.com/h8liu/leaf/ast"
+)
 
 /*
 
@@ -111,4 +115,8 @@ var example = &Package{
 			},
 		},
 	},
+}
+
+func main() {
+
 }
