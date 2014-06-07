@@ -22,6 +22,10 @@ func fabo(i int) {
 	return fabo(i-1) + fabo(i-2)
 }
 
+struct T {
+	x int
+}
+
 */
 
 var example = &Module{
@@ -116,6 +120,12 @@ var example = &Module{
 						},
 					},
 				},
+			},
+		},
+		&StructDecl{
+			Name: "T",
+			Fields: []*Field{
+				{"x", &BasicType{Int}, false},
 			},
 		},
 	},
