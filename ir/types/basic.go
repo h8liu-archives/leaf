@@ -6,22 +6,20 @@ import (
 )
 
 type Basic struct {
-	Name  string // type name
-	Size  uint32
-	Align uint32
+	name  string // type name
+	size  uint32
+	align uint32
 }
 
 func newBasic(name string, size uint32) *Basic {
 	return &Basic{name, size, size}
 }
+func (b *Basic) Ident() string     { return b.name }
+func (b *Basic) Type() symbol.Type { return symbol.Builtin }
+func (b *Basic) Align() uint32     { return b.align }
+func (b *Basic) Size() uint32      { return b.size }
 
-func (b *Basic) Ident() string {
-	return b.Name
-}
-
-func (b *Basic) Type() symbol.Type {
-	return symbol.Builtin
-}
+var _ Type = new(Basic)
 
 var (
 	Int  = newBasic("int", 4)

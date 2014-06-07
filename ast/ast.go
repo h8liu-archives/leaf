@@ -9,7 +9,7 @@ const (
 	Uint = Uint32
 	Int  = Int32
 	Ptr  = Uint32
-	Char = Uint8
+	Char = Int8
 	Byte = Uint8
 )
 

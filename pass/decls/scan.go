@@ -11,7 +11,7 @@ import (
 type scanner struct {
 	mod     *module.Module
 	context *scope.Context
-	e       error
+	errors  []error
 }
 
 func ne(e error) {
@@ -36,12 +36,14 @@ func newScanner(m *module.Module) *scanner {
 	return ret
 }
 
-func (s *scanner) define(sym symbol.Symbol) {
-	if s.e != nil {
-		return
+func (s *scanner) record(e error) {
+	if e != nil {
+		s.errors = append(s.errors, e)
 	}
+}
 
-	s.e = s.mod.Define(sym)
+func (s *scanner) define(sym symbol.Symbol) {
+	s.record(s.mod.Define(sym))
 }
 
 func Scan(m *ast.Module, mod *module.Module) {
@@ -54,7 +56,6 @@ func Scan(m *ast.Module, mod *module.Module) {
 		case *ast.VarDecl:
 		case *ast.StructDecl:
 			t := types.NewStruct(d.Name)
-			// TODO: parse and add the fields
 			s.define(t)
 		case *ast.FuncDecl:
 		case *ast.IfaceDecl:
