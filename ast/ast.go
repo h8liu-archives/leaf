@@ -19,7 +19,7 @@ type (
 	Stmt interface{}
 	Expr interface{}
 
-	Package struct {
+	Module struct {
 		Imports []*Import
 		Decls   []Decl
 	}
@@ -49,6 +49,11 @@ type (
 		Export bool
 	}
 
+	IfaceDecl struct {
+		Name  string
+		Funcs []*FuncSig
+	}
+
 	// types
 	BasicType  struct{ T int }
 	PtrType    struct{ Type Type }
@@ -58,11 +63,15 @@ type (
 		Type Type
 	}
 
-	FuncDecl struct {
+	FuncSig struct {
 		Name  string
 		Paras []*Para
 		Type  Type
-		Body  *BlockStmt
+	}
+
+	FuncDecl struct {
+		*FuncSig
+		Body *BlockStmt
 	}
 
 	Para struct {

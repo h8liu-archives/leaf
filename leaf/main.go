@@ -24,7 +24,7 @@ func fabo(i int) {
 
 */
 
-var example = &Package{
+var example = &Module{
 	Imports: []*Import{
 		{"fmt", "fmt"},
 	},
@@ -36,7 +36,9 @@ var example = &Package{
 			Expr: &StringLit{"Hello World"},
 		},
 		&FuncDecl{
-			Name: "main",
+			FuncSig: &FuncSig{
+				Name: "main",
+			},
 			Body: &BlockStmt{
 				[]Stmt{
 					&CallStmt{
@@ -68,9 +70,11 @@ var example = &Package{
 			},
 		},
 		&FuncDecl{
-			Name: "fabo",
-			Paras: []*Para{
-				{"i", &BasicType{Int}},
+			FuncSig: &FuncSig{
+				Name: "fabo",
+				Paras: []*Para{
+					{"i", &BasicType{Int}},
+				},
 			},
 			Body: &BlockStmt{
 				[]Stmt{
