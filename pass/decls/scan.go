@@ -18,5 +18,5 @@ func BuiltIn() *scope.Scope {
 }
 
 func ScanPackage(p *ast.Package, priv *scope.Scope, pub *scope.Scope) {
-
+	
 }
