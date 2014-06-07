@@ -15,9 +15,15 @@ func newBasic(name string, size uint32) *BasicType {
 	return &BasicType{&TypeBox{name, size, size}}
 }
 
+func (b *TypeBox) Ident() string {
+	return b.Name
+}
+
 var (
-	Int32Type  = newBasic("int32", 4)
-	Uint32Type = newBasic("uint32", 4)
-	Int8Type   = newBasic("int8", 1)
-	Uint8Type  = newBasic("uint8", 1)
+	Int  = newBasic("int", 4)
+	Uint = newBasic("uint", 4)
+	Byte = newBasic("byte", 1)
+	Char = newBasic("char", 1)
+
+	Ptr = newBasic("ptr", 4)
 )

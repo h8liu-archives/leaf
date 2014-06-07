@@ -2,11 +2,13 @@ package scope
 
 import (
 	"fmt"
+
+	"github.com/h8liu/leaf/ident"
 )
 
 // A scope like a namespace where identifiers are put into it
 type Item interface {
-	Name() string
+	Ident() string
 }
 
 type Scope struct {
@@ -20,7 +22,10 @@ func New() *Scope {
 }
 
 func (s *Scope) Define(i Item) error {
-	name := i.Name()
+	name := i.Ident()
+	if !ident.IsValid(name) {
+		return fmt.Errorf("%q is not a valid identifier", name)
+	}
 	if s.items[name] != nil {
 		return fmt.Errorf("%q already defined in scope", name)
 	}
