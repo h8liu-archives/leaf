@@ -4,45 +4,43 @@ import (
 	"fmt"
 
 	"github.com/h8liu/leaf/ident"
+	"github.com/h8liu/leaf/symbol"
 )
 
-// A scope like a namespace where identifiers are put into it
-type Item interface {
-	Ident() string
-}
-
 type Scope struct {
-	items map[string]Item
+	syms map[string]symbol.Symbol
 }
 
 func New() *Scope {
 	ret := new(Scope)
-	ret.items = make(map[string]Item)
+	ret.syms = make(map[string]symbol.Symbol)
 	return ret
 }
 
-func (s *Scope) Define(i Item) error {
-	name := i.Ident()
+func (s *Scope) Define(sym symbol.Symbol) error {
+	name := sym.Ident()
 	if !ident.IsValid(name) {
 		return fmt.Errorf("%q is not a valid identifier", name)
 	}
-	if s.items[name] != nil {
+	if s.syms[name] != nil {
 		return fmt.Errorf("%q already defined in scope", name)
 	}
 
-	s.items[name] = i
+	s.syms[name] = sym
 	return nil
 }
 
-func (s *Scope) Query(name string) Item {
-	return s.items[name]
+func (s *Scope) Query(name string) symbol.Symbol {
+	return s.syms[name]
 }
 
-func (s *Scope) List() []Item {
-	ret := make([]Item, 0, len(s.items))
-	for _, item := range s.items {
-		ret = append(ret, item)
+func (s *Scope) List() []symbol.Symbol {
+	ret := make([]symbol.Symbol, 0, len(s.syms))
+	for _, s := range s.syms {
+		ret = append(ret, s)
 	}
+
+	symbol.Sort(ret)
 
 	return ret
 }

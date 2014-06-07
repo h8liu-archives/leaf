@@ -5,6 +5,7 @@ import (
 	"github.com/h8liu/leaf/ir/module"
 	"github.com/h8liu/leaf/ir/types"
 	"github.com/h8liu/leaf/scope"
+	"github.com/h8liu/leaf/symbol"
 )
 
 type scanner struct {
@@ -35,12 +36,12 @@ func newScanner(m *module.Module) *scanner {
 	return ret
 }
 
-func (s *scanner) define(item scope.Item) {
+func (s *scanner) define(sym symbol.Symbol) {
 	if s.e != nil {
 		return
 	}
 
-	s.e = s.mod.Define(item)
+	s.e = s.mod.Define(sym)
 }
 
 func Scan(m *ast.Module, mod *module.Module) {

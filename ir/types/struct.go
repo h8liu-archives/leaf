@@ -1,5 +1,9 @@
 package types
 
+import (
+	"github.com/h8liu/leaf/symbol"
+)
+
 type Struct struct {
 	Name string
 	Size uint32
@@ -15,6 +19,10 @@ type Field struct {
 
 func (s *Struct) Ident() string {
 	return s.Name
+}
+
+func (s *Struct) Type() symbol.Type {
+	return symbol.Struct
 }
 
 func NewStruct(name string) *Struct {

@@ -1,6 +1,10 @@
 // Type representation
 package types
 
+import (
+	"github.com/h8liu/leaf/symbol"
+)
+
 type Basic struct {
 	Name  string // type name
 	Size  uint32
@@ -13,6 +17,10 @@ func newBasic(name string, size uint32) *Basic {
 
 func (b *Basic) Ident() string {
 	return b.Name
+}
+
+func (b *Basic) Type() symbol.Type {
+	return symbol.Builtin
 }
 
 var (

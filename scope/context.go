@@ -2,6 +2,8 @@ package scope
 
 import (
 	"errors"
+
+	"github.com/h8liu/leaf/symbol"
 )
 
 type Context struct {
@@ -28,11 +30,11 @@ func (c *Context) IsGlobal() bool {
 	return c.Level() == 1
 }
 
-func (c *Context) Define(item Item) error {
-	return c.Top().Define(item)
+func (c *Context) Define(s symbol.Symbol) error {
+	return c.Top().Define(s)
 }
 
-func (c *Context) Query(name string) Item {
+func (c *Context) Query(name string) symbol.Symbol {
 	n := len(c.scopes)
 	for i := range c.scopes {
 		s := c.scopes[n-1-i]
