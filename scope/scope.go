@@ -37,3 +37,12 @@ func (s *Scope) Define(i Item) error {
 func (s *Scope) Query(name string) Item {
 	return s.items[name]
 }
+
+func (s *Scope) List() []Item {
+	ret := make([]Item, 0, len(s.items))
+	for _, item := range s.items {
+		ret = append(ret, item)
+	}
+
+	return ret
+}

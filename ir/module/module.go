@@ -7,3 +7,7 @@ import (
 type Module struct {
 	*scope.Scope
 }
+
+func (m *Module) PrintDecls() {
+
+}
